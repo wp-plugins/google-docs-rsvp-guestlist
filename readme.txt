@@ -4,7 +4,7 @@ Donate link: http://www.weedeedee.com/wordpress/google-docs-rsvp-guestlist-plugi
 Tags: RSVP, guestlist, wedding, Google Docs, spreadsheet
 Requires at least: 2.5
 Tested up to: 2.5
-Stable tag: 1.0
+Stable tag: 1.1
 
 This plugin allows you to add RSVP and guestlist functionality. Guests can leave custom messages for the planners. Uses Google Docs spreadsheets.
 
@@ -62,6 +62,9 @@ Thanks!
 
 You are required to have PHP version 5. Sorry, the only solution right now is to use that version of PHP.
 
+= How do I change some of the text? =
+
+If you cannot change the text in the options page, you can change it in the source code (by editting wp-gustlist-plugin.php). This is not a very safe thing to do, but you could search the code for the words you want to change and fiddle around with it. This take familiarity with HTML and a little PHP. 
 
 == License ==
     Copyright (C) 2008 Gifford Cheung, Brian Watanabe

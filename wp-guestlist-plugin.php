@@ -1,7 +1,7 @@
 <?php 
 /*
 Plugin Name: Google Docs Guestlist
-Version: 1.0
+Version: 1.1
 Plugin URI: http://www.weedeedee.com/wordpress/google-docs-rsvp-guestlist-plugin-for-wordpress/
 Description: A wedding guestlist that uses Google Docs for its backend. Instructions: Create a google docs spreadsheet with the following 7 headers: Guest Name, Code, Custom Message for Guest, Ceremony, Banquet, Message from Guest, Hotel. Go to "Settings->Google Docs Guestlist" to configure. Add the text: wpgc-googledocsguestlist in the content of your RSVP page.
 Author: Gifford Cheung, Brian Watanabe
@@ -458,11 +458,13 @@ function wpgc_my_googledocsguestlist ($text) {
 						$newentry["messagefromguest"] = stripslashes($_POST['messagefromguest'.$i]);
 					}
 					// for the hotel information, we'll only add it to the entry if they are attending either the banquet or the ceremony
-					if (strcmp($newentry["ceremony"],"Attending") == 0 ||
-						strcmp($newentry["banquet"],"Attending") == 0) {
-                                                $hotel_index = str_replace("hotel", "", $hotel);
-                                                $hotel_name = $hotel_list[$hotel_index];
-                                                $newentry["hotel"] = $hotel_name;
+					if ($hotelon) {
+						if (strcmp($newentry["ceremony"],"Attending") == 0 ||
+							strcmp($newentry["banquet"],"Attending") == 0) {
+	                                                $hotel_index = str_replace("hotel", "", $hotel);
+	                                                $hotel_name = $hotel_list[$hotel_index];
+	                                                $newentry["hotel"] = $hotel_name;
+						}
 					}
 					// for the comments from the quest, we'll only plug it into the first entry
 					if ($i == 0) {
@@ -496,7 +498,7 @@ function wpgc_my_googledocsguestlist ($text) {
 				}
 
 				// (B) Give user confirmation
-				$emailreport = 'NEW RSVP!\n';
+				$emailreport = "NEW RSVP! \n";
 				$outputtext .= '<b>Thank you for your response!</b><br/>';
 				$outputtext .= "<br/>\n";
 				$plural = '';
@@ -559,8 +561,10 @@ function wpgc_my_googledocsguestlist ($text) {
 				$outputtext .= "<br/>\n";
 				$emailreport .= "\n";
 
-                                $outputtext .= "You will be staying at the <b>" . $your_hotel . ".</b><br/><br/>\n";
+				if ($hotelon) {
+                $outputtext .= "You will be staying at the <b>" . $your_hotel . ".</b><br/><br/>\n";
 				$emailreport .= "They will be staying at the " . $your_hotel . ".\n";
+				}
 
 				if (!empty($your_message)) {
 					$outputtext .= "Your message will be delivered:<br/><blockquote>";
@@ -644,15 +648,17 @@ function wpgc_my_googledocsguestlist ($text) {
 				}	
 				// Some questions for the whole party -- needs some tweaking
 				// Blocked Rooms, this doesn't record past information.
-				$outputtext .= "<i>If you are planning to stay at one of the hotels where we have reserved rooms under \"" . $hotel_reservation_name . ",\" please let us know where you will be staying:</i>";
-				$outputtext .= "<br/>\n";
-                                for($i=0; $i < $num_hotels; $i++) {
-                                        $outputtext .= "<input name='hotel' type='radio' value='hotel".$i."'/>".$hotel_list[$i];
+				if ( $hotelon ) {
+					$outputtext .= "<i>If you are planning to stay at one of the hotels where we have reserved rooms under \"" . $hotel_reservation_name . ",\" please let us know where you will be staying:</i>";
 					$outputtext .= "<br/>\n";
-                                }
-                                $outputtext .= "<input name='hotel' type='radio' value='none'/>Not planning to stay at either of these hotels";
-				$outputtext .= "<br/>\n";
-				$outputtext .= "<br/>\n";
+	                                for($i=0; $i < $num_hotels; $i++) {
+	                                        $outputtext .= "<input name='hotel' type='radio' value='hotel".$i."'/>".$hotel_list[$i];
+						$outputtext .= "<br/>\n";
+	                                }
+	                                $outputtext .= "<input name='hotel' type='radio' value='none'/>Not planning to stay at any of these hotels";
+					$outputtext .= "<br/>\n";
+					$outputtext .= "<br/>\n";
+				}
 
 				// Message from the Guests
 				$outputtext .= "<b>Let us know how you're doing. Leave us a note!</b><br/>\n";
