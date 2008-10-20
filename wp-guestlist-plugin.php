@@ -294,11 +294,11 @@ function wpgc_get_listFeed_for_guestcode($gdClient, $spreadsheet_name,$worksheet
 	$worksheet_key = '';
 
 	// Find your spreadsheet id
-	$feed = $gdClient->getSpreadsheetFeed();
+	$feed = $gdClient->getSpreadsheetFeed('http://spreadsheets.google.com/feeds/spreadsheets/private/full');
 	foreach($feed->entries as $entry) {
 		if ($entry->title->text == $spreadsheet_name) {
 			$id = split('/', $entry->id->text);
-			$spreadsheet_key = $id[5];
+			$spreadsheet_key = $id[7];
 		}
 	}
 
