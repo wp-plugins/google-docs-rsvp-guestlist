@@ -1,10 +1,9 @@
 === Plugin Name ===
-Contributors: Gifford Cheung, Brian Watanabe
-Donate link: http://www.weedeedee.com/wordpress/google-docs-rsvp-guestlist-plugin-for-wordpress/
+Contributors: Gifford Cheung, Brian Watanabe, Chongsun Ahn
 Tags: RSVP, guestlist, wedding, Google Docs, spreadsheet
 Requires at least: 2.5
-Tested up to: 2.5
-Stable tag: 1.2
+Tested up to:  4.0.1
+Stable tag: 2.0
 
 This plugin allows you to add RSVP and guestlist functionality. Guests can leave custom messages for the planners. Uses Google Docs spreadsheets.
 
@@ -12,7 +11,7 @@ This plugin allows you to add RSVP and guestlist functionality. Guests can leave
 
 1. Create a google docs spreadsheet with the following 7 headers: Guest Name, Code, Custom Message for Guest, Ceremony, Banquet, Message from Guest, Hotel. 
 2. Go to "Settings->Google Docs Guestlist" to configure. 
-3. Add the text: wpgc-googledocsguestlist in the content of your RSVP page.
+3. Add the text: gdrsvp-googledocsrsvp in the content of your RSVP page.
 
 == Description ==
 This plugin allows you to add RSVP and guestlist functionality to your Wordpress site. It tracks RSVPs for ceremony and banquet. Additionally, guests can leave custom messages for the planners. The guestlist is maintained with a Google Docs spreadsheet which is very easy to use.
@@ -54,7 +53,7 @@ Thanks!
 == Screenshots ==
 
 1. Sample Google Docs Spreadsheet. Make sure your headers are spelled exactly the same.
-2. How to embed your RSVP content into your page.
+2. How to embed your RSVP content into your page. (currently out of date)
 
 == Frequently Asked Questions ==
 
